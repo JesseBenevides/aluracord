@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
 import Title from '../components/Title';
 import GlobalStyle from '../components/GlobalStyle';
 
 function HomePage() {
-  const username = 'JesseBenevides';
+  const [username, setUsername] = useState('jessebenevides');
 
   return (
     <>
@@ -66,6 +67,11 @@ function HomePage() {
 
             <TextField
               fullWidth
+              value={ username }
+              onChange={ (event) => {
+                const { value } = event.target;
+                setUsername(value);
+              }}
               textFieldColors={{
                 neutral: {
                   textColor: appConfig.theme.colors.neutrals[200],
