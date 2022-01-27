@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
 import Title from '../components/Title';
-import GlobalStyle from '../components/GlobalStyle';
 
 function HomePage() {
   const [username, setUsername] = useState('jessebenevides');
@@ -11,7 +10,6 @@ function HomePage() {
 
   return (
     <>
-      <GlobalStyle />
       <Box
         styleSheet={{
           display: 'flex',
