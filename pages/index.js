@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
 import Title from '../components/Title';
@@ -6,6 +7,7 @@ import GlobalStyle from '../components/GlobalStyle';
 
 function HomePage() {
   const [username, setUsername] = useState('jessebenevides');
+  const router = useRouter();
 
   return (
     <>
@@ -44,6 +46,10 @@ function HomePage() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={ (event) => {
+              event.preventDefault();
+              router.push('/chat');
+            }}
             styleSheet={{
               display: 'flex',
               flexDirection: 'column',
