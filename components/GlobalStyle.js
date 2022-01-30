@@ -28,8 +28,6 @@ function GlobalStyle() {
       #__next > * {
         flex: 1;
       }
-
-      /* ./App fit Height */
     `}</style>
   );
 }

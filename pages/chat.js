@@ -8,6 +8,20 @@ function ChatPage() {
   const [mensagem, setMensagem] = useState('');
   const [listaDeMensagens, setListaDeMensagens] = useState([]);
 
+  function handleNewMessage(message) {
+    const newMessage = {
+      id: listaDeMensagens.length + 1,
+      from: 'JesseBenevides',
+      text: message,
+    };
+
+    setListaDeMensagens([
+      newMessage,
+      ...listaDeMensagens
+    ]);
+    setMensagem('');
+  }
+
   return (
     <Box
       styleSheet={{
@@ -66,8 +80,7 @@ function ChatPage() {
               onKeyPress={event => {
                 if (event.key === 'Enter') {
                   event.preventDefault();
-                  setListaDeMensagens([mensagem, ...listaDeMensagens]);
-                  setMensagem('');
+                  handleNewMessage(mensagem);
                 }
               }}
               placeholder="Insira sua mensagem aqui..."

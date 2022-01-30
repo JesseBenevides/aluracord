@@ -14,9 +14,9 @@ function MessageList({ mensagens }) {
         marginBottom: '16px'
       }}
     >
-      {mensagens.map((mensagem, index) => (
+      {mensagens.map((mensagem) => (
         <Text
-          key={ index }
+          key={ mensagem.id }
           tag="li"
           styleSheet={{
             borderRadius: '5px',
@@ -42,7 +42,7 @@ function MessageList({ mensagens }) {
               }}
               src={`https://github.com/jessebenevides.png`}
             />
-            <Text tag="strong">JesseBenevides</Text>
+            <Text tag="strong">{ mensagem.from }</Text>
             <Text
               styleSheet={{
                 fontSize: '10px',
@@ -54,7 +54,7 @@ function MessageList({ mensagens }) {
               {new Date().toLocaleDateString()}
             </Text>
           </Box>
-          { mensagem }
+          { mensagem.text }
         </Text>
       ))}
     </Box>
