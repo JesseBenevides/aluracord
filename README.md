@@ -12,4 +12,4 @@ Desenvolver um chat online inspirado no discord
 - [NextJS](https://nextjs.org/)
 - [ReactJS](https://pt-br.reactjs.org/) 
 - [SkyNextUI](https://storybook.skynexui.dev/) 
-- [Supabase](https://github.com/supabase/supabase-js)
+- [Supabase](https://supabase.com/docs)
