@@ -1,5 +1,6 @@
 import { Box, Text, Image } from '@skynexui/components';
 import appConfig from '../config.json';
+import getDateAndTime from '../utils/getDateAndTime';
 
 function MessageList({ mensagens }) {
   return (
@@ -51,8 +52,8 @@ function MessageList({ mensagens }) {
               }}
               tag="span"
             >
-              {new Date().toLocaleDateString()}
-              {/* { mensagem.created_at } */}
+              { new Date(mensagem.created_at).toLocaleDateString() }
+              {/* { getDateAndTime(mensagem.created_at).date } */}
             </Text>
           </Box>
           { mensagem.text }
