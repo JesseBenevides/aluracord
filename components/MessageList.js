@@ -40,7 +40,7 @@ function MessageList({ mensagens }) {
                 display: 'inline-block',
                 marginRight: '8px'
               }}
-              src={`https://github.com/jessebenevides.png`}
+              src={`https://github.com/${mensagem.from}.png`}
             />
             <Text tag="strong">{ mensagem.from }</Text>
             <Text
@@ -52,6 +52,7 @@ function MessageList({ mensagens }) {
               tag="span"
             >
               {new Date().toLocaleDateString()}
+              {/* { mensagem.created_at } */}
             </Text>
           </Box>
           { mensagem.text }

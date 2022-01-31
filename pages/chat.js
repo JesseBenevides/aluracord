@@ -1,24 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Text, TextField, Image } from '@skynexui/components';
 import Header from '../components/Header';
 import MessageList from '../components/MessageList';
 import appConfig from '../config.json';
+import { fetchMessages, sendMessages } from '../services/supabase';
 
 function ChatPage() {
   const [mensagem, setMensagem] = useState('');
   const [listaDeMensagens, setListaDeMensagens] = useState([]);
 
+  useEffect(() => {
+    async function getMessages() {
+      const messages = await fetchMessages();
+      setListaDeMensagens(messages);
+    }
+  
+    getMessages();
+  }, []);
+
   function handleNewMessage(message) {
     const newMessage = {
-      id: listaDeMensagens.length + 1,
       from: 'JesseBenevides',
       text: message,
     };
+    sendMessages(newMessage)
+      .then((data) => {
+        setListaDeMensagens([
+          data,
+          ...listaDeMensagens
+        ]);
+      });
 
-    setListaDeMensagens([
-      newMessage,
-      ...listaDeMensagens
-    ]);
     setMensagem('');
   }
 
