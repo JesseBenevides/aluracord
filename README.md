@@ -11,5 +11,5 @@ Desenvolver um chat online inspirado no discord
 ## Tecnologias utilizadas:
 - [NextJS](https://nextjs.org/)
 - [ReactJS](https://pt-br.reactjs.org/) 
-- [SkyNextUI](https://storybook.skynexui.dev/?path=/story/components-box--box-component) 
+- [SkyNextUI](https://storybook.skynexui.dev/) 
 - [Supabase](https://github.com/supabase/supabase-js)
