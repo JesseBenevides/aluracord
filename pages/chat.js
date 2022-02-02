@@ -4,10 +4,13 @@ import Header from '../components/Header';
 import MessageList from '../components/MessageList';
 import appConfig from '../config.json';
 import { fetchMessages, sendMessages } from '../services/supabase';
+import { useRouter } from 'next/router';
 
 function ChatPage() {
   const [mensagem, setMensagem] = useState('');
   const [listaDeMensagens, setListaDeMensagens] = useState([]);
+  const router = useRouter();
+  const { username } = router.query;
 
   useEffect(() => {
     async function getMessages() {
@@ -20,7 +23,7 @@ function ChatPage() {
 
   function handleNewMessage(message) {
     const newMessage = {
-      from: 'JesseBenevides',
+      from: username,
       text: message,
     };
     sendMessages(newMessage)
