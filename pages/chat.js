@@ -5,6 +5,7 @@ import MessageList from '../components/MessageList';
 import appConfig from '../config.json';
 import { fetchMessages, sendMessages } from '../services/supabase';
 import { useRouter } from 'next/router';
+import { ButtonSendSticker } from '../components/ButtonSendSticker';
 
 function ChatPage() {
   const [mensagem, setMensagem] = useState('');
@@ -111,6 +112,7 @@ function ChatPage() {
                 color: appConfig.theme.colors.neutrals[200]
               }}
             />
+            <ButtonSendSticker />
           </Box>
         </Box>
       </Box>
