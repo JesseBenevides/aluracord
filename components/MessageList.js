@@ -56,7 +56,20 @@ function MessageList({ mensagens }) {
               {/* { getDateAndTime(mensagem.created_at).date } */}
             </Text>
           </Box>
-          { mensagem.text }
+          { mensagem.text.startsWith(':sticker:')
+            ? (
+                <Image
+                  styleSheet={{
+                  width: '60px',
+                  height: '60px',
+                }}
+                  src={ mensagem.text.replace(':sticker:', '')}
+                />
+            )
+            : (
+                mensagem.text
+            )
+          }
         </Text>
       ))}
     </Box>
