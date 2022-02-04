@@ -22,3 +22,13 @@ export async function sendMessages(message) {
   
     return data[0];
 }
+
+export function listetingMessagesInRealTime(setMessage) {
+  return supabaseClient
+    .from('messages')
+    .on('INSERT', (liveResponse) => {
+      setMessage(liveResponse.new);
+    })
+    .subscribe();
+}
+
