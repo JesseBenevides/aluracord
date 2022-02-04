@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Button, Text, Image } from '@skynexui/components';
 import appConfig from '../config.json';
-import stickerIcon from '../discord.png';
 
 export function ButtonSendSticker(props) {
   const [isOpen, setOpenState] = React.useState('');
