@@ -3,7 +3,7 @@ import { Box, Text, TextField, Image } from '@skynexui/components';
 import Header from '../components/Header';
 import MessageList from '../components/MessageList';
 import appConfig from '../config.json';
-import { fetchMessages, sendMessages } from '../services/supabase';
+import { fetchMessages, listetingMessagesInRealTime, sendMessages } from '../services/supabase';
 import { useRouter } from 'next/router';
 import { ButtonSendSticker } from '../components/ButtonSendSticker';
 
@@ -18,8 +18,21 @@ function ChatPage() {
       const messages = await fetchMessages();
       setListaDeMensagens(messages);
     }
-  
+
     getMessages();
+  
+    const subscription = listetingMessagesInRealTime((novaMensagem) => {
+      setListaDeMensagens((valorAtualDaLista) => {
+        return [
+          novaMensagem,
+          ...valorAtualDaLista,
+        ];
+      });
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    }
   }, []);
 
   function handleNewMessage(message) {
