@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Text, TextField, Image } from '@skynexui/components';
+import { Box, TextField, Button } from '@skynexui/components';
 import Header from '../components/Header';
 import MessageList from '../components/MessageList';
 import appConfig from '../config.json';
-import { fetchMessages, listetingMessagesInRealTime, sendMessages } from '../services/supabase';
+import {
+  fetchMessages,
+  listetingMessagesInRealTime,
+  sendMessages
+} from '../services/supabase';
 import { useRouter } from 'next/router';
 import { ButtonSendSticker } from '../components/ButtonSendSticker';
 
@@ -20,33 +24,35 @@ function ChatPage() {
     }
 
     getMessages();
-  
-    const subscription = listetingMessagesInRealTime((novaMensagem) => {
-      setListaDeMensagens((valorAtualDaLista) => {
-        return [
-          novaMensagem,
-          ...valorAtualDaLista,
-        ];
+
+    const subscription = listetingMessagesInRealTime(novaMensagem => {
+      console.log('Nova mensagem:', novaMensagem);
+      console.log('listaDeMensagens:', listaDeMensagens);
+      // Quero reusar um valor de referencia (objeto/array)
+      // Passar uma função pro setState
+
+      // setListaDeMensagens([
+      //     novaMensagem,
+      //     ...listaDeMensagens
+      // ])
+      setListaDeMensagens(valorAtualDaLista => {
+        return [novaMensagem, ...valorAtualDaLista];
       });
     });
 
     return () => {
       subscription.unsubscribe();
-    }
+    };
   }, []);
 
   function handleNewMessage(message) {
     const newMessage = {
       from: username,
-      text: message,
+      text: message
     };
-    sendMessages(newMessage)
-      .then((data) => {
-        setListaDeMensagens([
-          data,
-          ...listaDeMensagens
-        ]);
-      });
+    sendMessages(newMessage).then(data => {
+      setListaDeMensagens([data, ...listaDeMensagens]);
+    });
 
     setMensagem('');
   }
@@ -92,7 +98,7 @@ function ChatPage() {
             padding: '16px'
           }}
         >
-          <MessageList mensagens={ listaDeMensagens } />
+          <MessageList mensagens={listaDeMensagens} />
 
           <Box
             as="form"
@@ -125,8 +131,36 @@ function ChatPage() {
                 color: appConfig.theme.colors.neutrals[200]
               }}
             />
+
+            <Button
+              disabled={!mensagem}
+              onClick={() => {
+                handleNewMessage(mensagem);
+              }}
+              iconName="paperPlane"
+              rounded="none"
+              buttonColors={{
+                contrastColor: `${appConfig.theme.colors.primary[550]}`,
+                mainColor: `${appConfig.theme.colors.neutrals[800]}`,
+                mainColorLight: `${appConfig.theme.colors.neutrals[600]}`,
+                mainColorStrong: `${appConfig.theme.colors.neutrals[900]}`
+              }}
+              styleSheet={{
+                borderRadius: '50%',
+                padding: '0 3px 0 0',
+                minWidth: '50px',
+                minHeight: '50px',
+                fontSize: '20px',
+                marginBottom: '8px',
+                lineHeight: '0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: appConfig.theme.colors.neutrals[300]
+              }}
+            />
             <ButtonSendSticker
-              onStickerClick={(sticker) => {
+              onStickerClick={sticker => {
                 handleNewMessage(':sticker: ' + sticker);
               }}
             />
@@ -135,7 +169,6 @@ function ChatPage() {
       </Box>
     </Box>
   );
-
 }
 
 export default ChatPage;
